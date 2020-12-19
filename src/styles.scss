@@ -11,6 +11,12 @@ body {
   color: var(--primary-font-color);
 }
 
+.neon-text {
+  text-shadow:
+  0 0 5px var(--primary-font-color),
+  0 0 10px var(--primary-font-color),
+}
+
 .card {
   background-color: var(--secondary-color);
 }

@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LatestImageComponent } from './latest-image/latest-image.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LatestImageComponent
   ],
   imports: [
     BrowserModule,

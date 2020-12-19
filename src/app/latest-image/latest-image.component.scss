@@ -1,0 +1,14 @@
+.refresh-btn {
+  color: var(--primary-font-color);
+  background-color: var(--secondary-color);
+}
+
+.refresh-btn:hover {
+  color: var(--secondary-color);
+  background-color: var(--primary-font-color);
+  text-shadow:
+  0 0 5px var(--secondary-font-color),
+  0 0 10px var(--secondary-font-color),
+  0 0 15px var(--secondary-font-color),
+  0 0 20px var(--secondary-font-color),
+}
