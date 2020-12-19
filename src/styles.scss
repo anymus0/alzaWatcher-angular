@@ -6,6 +6,11 @@
   --secondary-font-color: #7b2cbf;
 }
 
+::selection {
+  color: var(--primary-font-color);
+  background: var(--primary-color);
+}
+
 body {
   background-color: var(--primary-color);
   color: var(--primary-font-color);
@@ -19,4 +24,6 @@ body {
 
 .card {
   background-color: var(--secondary-color);
+  -webkit-box-shadow: 5px 3px 15px 3px rgba(255,30,240,0.5);
+  box-shadow: 5px 3px 15px 3px rgba(255,30,240,0.5);
 }

@@ -1,28 +1,55 @@
 <div id="app">
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12 pb-4">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title neon-text">Card title</h5>
-            <p class="card-text neon-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <ng-template [ngIf]="!productIsLoading" [ngIfElse]="loading">
+      <ng-template [ngIf]="products.length > 0" [ngIfElse]="blocked">
+      <div class="row">
+        <div class="col">
+          <h3 class="neon-text text-center">Last update: {{ lastUpdate | date:'h:mm:ss aaa' }}</h3>
+        </div>
+      </div>
+      <div class="row">
+          <div
+            class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12 pb-5 d-flex justify-content-center"
+            *ngFor="let product of products"
+          >
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title neon-text">{{ product.name }}</h5>
+              <p class="card-text neon-text">{{ product.price }}</p>
+              <p class="card-text neon-text">{{ product.status }}</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title neon-text">Card title</h5>
-            <p class="card-text neon-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div>
+    </ng-template>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        <a [href]="productsURL" target="_blank">
+          <button class="btn neon-btn neon-text">Jump to WebShop's page</button>
+        </a>
       </div>
     </div>
+    </ng-template>
+    <ng-template [ngIf]="!imgIsLoading" [ngIfElse]="loading">
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <app-latest-image [imgURL]="imgURL" *ngIf="imgURL !== null"></app-latest-image>
+        </div>
+      </div>
+    </ng-template>
     <div class="row">
       <div class="col d-flex justify-content-center">
-        <app-latest-image></app-latest-image>
+        <button class="btn neon-btn neon-text" (click)="setImageURL()">Get Latest Image</button>
       </div>
     </div>
   </div>
-
 </div>
+
+<ng-template #loading>
+  <h3 class="neon-text text-center">Gimme a few seconds, I'm loading...</h3>
+</ng-template>
+<ng-template #blocked>
+  <h3 class="neon-text text-center">Blocked by Bot Detection!</h3>
+</ng-template>
+
+
