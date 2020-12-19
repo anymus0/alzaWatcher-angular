@@ -7,6 +7,10 @@ import { catchError, retry } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class HttpService {
+  get(url: string): Observable<any> {
+    const dataStream = this.http.get(url);
+    return dataStream;
+  }
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 }
