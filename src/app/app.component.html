@@ -1,28 +1,29 @@
 <div id="app">
+  <ng-template [ngIf]="online" [ngIfElse]="offline">
   <div class="container-fluid">
     <ng-template [ngIf]="!productIsLoading" [ngIfElse]="loading">
       <ng-template [ngIf]="products.length > 0" [ngIfElse]="blocked">
+        <div class="row pt-3">
+          <div class="col">
+            <h3 class="neon-text text-center">Last update: {{ lastUpdate | date:'h:mm:ss aaa' }}</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12 pb-5 d-flex justify-content-center"
+            *ngFor="let product of products"
+          >
+            <app-product [product]="product"></app-product>
+          </div>
+        </div>
+      </ng-template>
       <div class="row">
-        <div class="col">
-          <h3 class="neon-text text-center">Last update: {{ lastUpdate | date:'h:mm:ss aaa' }}</h3>
+        <div class="col-12 d-flex justify-content-center">
+          <a [href]="productsURL" target="_blank">
+            <button class="btn neon-btn neon-text">Jump to WebShop's page</button>
+          </a>
         </div>
       </div>
-      <div class="row">
-        <div
-          class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12 pb-5 d-flex justify-content-center"
-          *ngFor="let product of products"
-        >
-          <app-product [product]="product"></app-product>
-        </div>
-      </div>
-    </ng-template>
-    <div class="row">
-      <div class="col-12 d-flex justify-content-center">
-        <a [href]="productsURL" target="_blank">
-          <button class="btn neon-btn neon-text">Jump to WebShop's page</button>
-        </a>
-      </div>
-    </div>
     </ng-template>
     <ng-template [ngIf]="!imgIsLoading" [ngIfElse]="loading">
       <div class="row">
@@ -37,6 +38,7 @@
       </div>
     </div>
   </div>
+  </ng-template>
 </div>
 
 <ng-template #loading>
@@ -45,5 +47,9 @@
 <ng-template #blocked>
   <h3 class="neon-text text-center">Blocked by Bot Detection!</h3>
 </ng-template>
+<ng-template #offline>
+  <h3 class="neon-text text-center">Your device is currently offline!</h3>
+</ng-template>
+
 
 
