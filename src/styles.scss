@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-color: #10002b;
+  --secondary-color: #133e7c;
+  --primary-font-color: #ff1ef0;
+  --secondary-font-color: #7b2cbf;
+}
+
+body {
+  background-color: var(--primary-color);
+  color: var(--primary-font-color);
+}
+
+.card {
+  background-color: var(--secondary-color);
+}
