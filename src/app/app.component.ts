@@ -4,6 +4,7 @@ import { environment } from './../environments/environment';
 import { HttpService } from './http.service';
 import { Subscription } from 'rxjs';
 import { Product } from './models/Product';
+import { SocketioService } from './socketio.service';
 
 @Component({
   selector: 'app-root',
@@ -41,9 +42,19 @@ export class AppComponent implements OnInit, OnDestroy {
     );
   }
 
-  constructor(private httpService: HttpService, protected network: Network) {}
+  constructor(
+    private httpService: HttpService,
+    protected network: Network,
+    private socketService: SocketioService
+  ) {}
 
   ngOnInit(): void {
+    this.socketService.socket.on('productRefresh', (res: any) => {
+      this.products = res.products;
+      this.lastUpdate = new Date(res.date);
+      this.productsURL = res.productsURL;
+      this.productIsLoading = false;
+    });
     // fetch products
     this.setProducts();
     // online/offline status
