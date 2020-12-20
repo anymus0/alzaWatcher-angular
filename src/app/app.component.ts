@@ -31,15 +31,11 @@ export class AppComponent implements OnInit, OnDestroy {
     );
   }
 
-  setProducts(): void {
-    this.subscriptions.push(
-      this.httpService.get(`${environment.alzaWatcherAPI_URL}/getData/latestStatus`).subscribe(res => {
-        this.products = res.products;
-        this.lastUpdate = new Date(res.date);
-        this.productsURL = res.productsURL;
-        this.productIsLoading = false;
-      })
-    );
+  private setProducts(products: Array<Product>, lastUpdate: Date, productsURL: string): void {
+    this.products = products;
+    this.lastUpdate = lastUpdate;
+    this.productsURL = productsURL;
+    this.productIsLoading = false;
   }
 
   constructor(
@@ -49,14 +45,16 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // initial fetch
+    this.subscriptions.push(
+      this.httpService.get(`${environment.alzaWatcherAPI_URL}/getData/latestStatus`).subscribe(res => {
+        this.setProducts(res.products, res.lastUpdate, res.productsURL);
+      })
+    );
+    // realtime refresh products
     this.socketService.socket.on('productRefresh', (res: any) => {
-      this.products = res.products;
-      this.lastUpdate = new Date(res.date);
-      this.productsURL = res.productsURL;
-      this.productIsLoading = false;
+      this.setProducts(res.products, res.lastUpdate, res.productsURL);
     });
-    // fetch products
-    this.setProducts();
     // online/offline status
     this.subscriptions.push(
       this.network.onlineChanges.subscribe(onlineStatus => {
