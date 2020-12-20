@@ -21,7 +21,6 @@
     "@angular/router": "~11.0.5",
     "@angular/service-worker": "~11.0.5",
     "@ngx-pwa/offline": "^11.0.0",
-    "@types/socket.io-client": "^1.4.34",
     "bootstrap": "^4.5.3",
     "ngx-bootstrap": "^6.2.0",
     "rxjs": "~6.6.0",

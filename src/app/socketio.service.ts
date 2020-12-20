@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { io } from 'node_modules/socket.io-client';
+import { io } from 'socket.io-client';
 import { environment } from './../environments/environment';
 
 @Injectable({
