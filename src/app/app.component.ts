@@ -48,12 +48,12 @@ export class AppComponent implements OnInit, OnDestroy {
     // initial fetch
     this.subscriptions.push(
       this.httpService.get(`${environment.alzaWatcherAPI_URL}/getData/latestStatus`).subscribe(res => {
-        this.setProducts(res.products, res.lastUpdate, res.productsURL);
+        this.setProducts(res.products, res.date, res.productsURL);
       })
     );
     // realtime refresh products
     this.socketService.socket.on('productRefresh', (res: any) => {
-      this.setProducts(res.products, res.lastUpdate, res.productsURL);
+      this.setProducts(res.products, res.date, res.productsURL);
     });
     // online/offline status
     this.subscriptions.push(
