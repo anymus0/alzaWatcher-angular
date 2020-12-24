@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  alzaWatcherAPI_URL: 'http://localhost:3000'
+  alzaWatcherAPI_URL: 'http://localhost:3000',
+  alzaWatcherSocket_URL: 'http://localhost:3001'
 };
 
 /*
